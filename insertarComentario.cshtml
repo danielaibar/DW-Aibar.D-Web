@@ -1,0 +1,25 @@
+﻿@{
+     var usuario="";
+   var comentario = "";
+   var peliculaID = "";
+      
+    if(IsPost)
+    {
+        usuario = Request["usuario"];
+        comentario = Request["comentario"];
+        peliculaID = Request["idPelicula"];
+        
+         var db3 = Database.Open("MitjaMARKT");
+            var sqlSelect3 = "INSERT INTO Comentarios (Usuario, Comentario, idPelicula) " +
+                    "VALUES (@0,@1,@2)" ;
+
+    var productos =  db3.Query(sqlSelect3, usuario, comentario, peliculaID);
+   
+        
+    Response.Redirect("~/ProductoDetalles/"+@peliculaID);
+
+        }
+    
+}
+
+

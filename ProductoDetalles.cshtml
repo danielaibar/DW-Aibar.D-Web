@@ -1,0 +1,155 @@
+﻿@{
+    Layout = "~/Shared/Layouts/_Layout.cshtml";
+
+    var productoID = !UrlData[0].IsEmpty() ? UrlData[0] : "0";
+
+    var db = Database.Open("MitjaMARKT");
+    var sqlSelect = "SELECT * FROM Peliculas WHERE id = @0";
+
+    var producto = db.QuerySingle(sqlSelect,productoID);
+
+   
+
+   
+
+    var db2 = Database.Open("MitjaMARKT");
+    var sqlSelect2 = "SELECT * FROM Comentarios " +
+                    
+                    "WHERE idPelicula = @0";
+
+    var comentarios =  db2.Query(sqlSelect2,productoID);
+
+
+    /*****************************/
+
+   }
+
+@if(producto == null)
+{
+    <p>
+        No ha sido posible recuperar los detalles del producto.
+        Intenta buscarlo en una de las categorias de la izquierda.
+    </p>
+}
+else
+{
+    Page.Title = producto.Titulo;
+    <text>
+        <h1>@producto.Titulo</h1>
+        <div id="productoDetails">
+            <div style="display: flex;">
+                <img src="~/imgs/@producto.Portada" border="0">
+                <div style="margin-left: 10px;">
+                    <p style="padding-bottom: 5px;">Año: @producto.Anyo</p>
+                    <p style="padding-bottom: 5px;">Duracion: @producto.Duracion min</p>
+                    <p style="padding-bottom: 5px;">Pais: <img src="~/imgs/@producto.Pais" title="Alemania"/></p>
+                </div>
+            </div>
+            <div style="margin-top:20px ">
+                <p>Reparto: @producto.Actores min</p><br/>
+                <p>Sipnosis: @producto.Sipnosi</p>
+
+            </div>
+    <div id="lista-comentarios">
+
+        <div class="barra-comentarios">
+		    <div class="barra-izq"><span class="">Comentarios</span></div>		
+		</div>
+
+        <ul class="comentarios">
+        @if(comentarios.Count() == 0){
+            <span>se el primero en comentar</span>
+        }
+        
+        @foreach(var item2 in comentarios)
+        {
+            <li>
+                <div class="com_capa_avatar">
+                    <img src="/imgs/no_avatar_m.png" width="50px" height="50px" border="0" class="avatar" alt="Avatar">
+                </div>
+
+			    <div class="com_capa_globo">
+                    <img src="/imgs/globo.png" border="0">
+                </div>
+
+			    <div class="com_capa_ppal">
+			        <div class="cabecera">				
+			            <span class="usuario"><a style="color: #808080;" href="#">@item2.Usuario</a></span>
+			            <span class="fecha"><!--Hoy, 16:41--></span>                 
+			        </div>
+
+                    <div class="cuerpo">@item2.Comentario</div>
+
+                </div>
+			
+            </li>
+       }
+ 
+        </ul>
+    </div>
+            <div class="seccion">Dejar comentario</div>
+            <div class="box">
+                <div align="center">
+                 <form class="formulario-login" action="~/insertarComentario.cshtml" method="post">
+                     <div style="text-align: left;">
+                         Usuario: <br /><input type="text" name="usuario" value="@WebSecurity.CurrentUserName" />
+                     </div>
+                    
+                     <div style="display: none;">
+                        <input type="text" name="idPelicula" value="@productoID" />
+                     </div>
+                    <br />
+                     <div style="text-align: left;">
+                        <p>Comentario: [Campo obligatorio]<br><textarea name="comentario" style="height:60px;width:445px;font-size:11px;color:#334455"></textarea></p>
+                     </div>
+				    
+				    
+           
+                     <p>
+
+                        <input name="Enviar" type="submit" value="Enviar comentario" class="boton">
+                    </p>			
+				    
+				</form>
+                </div>
+                <br><br>
+            </div>
+            
+        </div>
+
+
+        <div id="pedidoForm">
+            <form action="~/" method="post">
+                <fieldset>
+                    <legend>Descargar Pelicula</legend>
+                    
+                    <p>
+                        <!--@@Html.Hidden("productoID", id)-->
+                      
+                        <a  href="~/get-torrent/@producto.Torrent"><button >Descargar</button></a>
+                    </p>
+                </fieldset>
+            </form>
+           <!-- <fieldset>
+                <legend>Compartir</legend>
+                <p>
+                    @*@GooglePlusOne.PlusOneButton(language: GooglePlusOne.Languages.Spanish)*@
+                </p>
+                <p>
+                    @*@Twitter.TweetButton(tweetText: "Echale un vistazo en el sitio web de MitjaMark",
+                                         dataCount: "horizontal")*@
+                </p>
+                <p>
+                    @*@{string currentUrl = Request.Url.ToString();}
+                    @Facebook.LikeButton(currentUrl,
+                                    width: 230,
+                                    buttonLayout: "standard",
+                                    height: 25,
+                                    showFaces: false)*@
+                </p>
+            </fieldset>-->
+        </div>
+    </text>
+}
+
+

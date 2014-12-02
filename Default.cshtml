@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/Shared/Layouts/_Layout.cshtml";
+    Page.Title = "Bienvenidos a VideoMarkt";
+
+   
+
+    
+
+    var db = Database.Open("MitjaMARKT");
+    var sqlSelect = "SELECT TOP 6 * FROM Peliculas " +
+                    "ORDER BY id DESC";
+                  
+
+    var productos =  db.Query(sqlSelect);
+}
+
+<h1>Bienvenidos a VideoMarkt</h1>
+<style>
+
+</style>
+
+<div id="wrapper-cat">
+     @foreach(var item in productos)
+        {
+            <div class="wrapper-movie">
+		    <div>
+		    <div class="movie-card movie-card-21" data-movie-id="184975">
+	            <h3 style="word-wrap: break-word;"><a href="~/ProductoDetalles/@item.id">@item.Titulo</a></h3>    
+	            <div class="mc-poster">
+                    <a href="~/ProductoDetalles/@item.id"><img src="~/imgs/@item.Portada" border="0"></a>
+                </div>
+                <div class="mc-info-container">
+		            <div class="mc-actions">
+		            </div>
+                    <div class="mc-year-country">(@item.Anyo) <img src="~/imgs/@item.Pais" title="Alemania"></div>
+        
+                    <div class="mc-cast">@item.Actores</div>
+                    <div class="mc-sinop" style="word-wrap: break-word;">@item.Sipnosi</div>
+                </div>
+                <div class="lists-box"></div>
+            </div>
+			    <div class="movie-cat-info">
+                    <div><i class="fa fa-clock-o"></i> @item.Duracion min.</div>	
+                    <div class="cat-mc-info"><a href="~/ProductoDetalles/@item.id" class="detailsButton"><i class="fa fa-ticket"></i> Ver</a></div>			
+                </div>
+		    </div>
+		
+		<div class="clearfix"></div>
+	</div>
+        }
+    <!--
+    <div class="wrapper-movie">
+		<div>
+		    <div class="movie-card movie-card-21" data-movie-id="742531">
+	            <h3 style="word-wrap: break-word;"><a href="/es/film742531.html">Sex Tape. Algo pasa en la nube</a></h3>    
+	            <div class="mc-poster">
+                    <a href="/es/film742531.html"><img src="http://pics.filmaffinity.com/Sex_Tape_Algo_pasa_en_la_nube-742531-full.jpg" border="0"></a>
+                </div>
+                <div class="mc-info-container">
+		            <div class="mc-actions">
+		            </div>
+                    <div class="mc-year-country">(2014) <img src="imgs/US.jpg" title="Estados Unidos"></div>
+                    <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Jake+Kasdan">Jake Kasdan</a></div>
+                    <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Cameron+Diaz">Cameron Diaz</a>, <a href="/es/search.php?stype=cast&amp;stext=Jason+Segel"> Jason Segel</a>, <a href="/es/search.php?stype=cast&amp;stext=Rob+Lowe"> Rob Lowe</a></div>
+                    <div class="mc-sinop" style="word-wrap: break-word;"><a title="Sex Tape. Algo pasa en la nube" href="/es/film742531.html">Cuando Jay (Jason Segel) y Annie (Cameron Diaz) entablaron relación, la atracción entre ambos era muy intensa. Diez años y dos hijos después, se dan cuenta de que hay que reavivar la llama... </a></div>
+                </div>
+                <div class="lists-box"></div>
+            </div>
+			<div class="movie-cat-info">
+                <div><i class="fa fa-clock-o"></i> 94 min.</div>
+                <div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>		
+            </div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+    <div class="wrapper-movie">
+		<div>
+		<div class="movie-card movie-card-21" data-movie-id="953800">
+	<h3 style="word-wrap: break-word;"><a href="/es/film953800.html">Más allá del amor</a></h3>    
+	<div class="mc-poster">
+        <a href="/es/film953800.html"><img src="http://pics.filmaffinity.com/M_s_all_del_amor-953800-full.jpg" border="0"></a>
+    </div>
+    <div class="mc-info-container">
+		<div class="mc-actions">
+		</div>
+        <div class="mc-year-country">(2014) <img src="imgs/US.jpg" title="Estados Unidos"></div>
+        <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Shana+Feste">Shana Feste</a></div>
+        <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Gabriella+Wilde">Gabriella Wilde</a>, <a href="/es/search.php?stype=cast&amp;stext=Alex+Pettyfer"> Alex Pettyfer</a>, <a href="/es/search.php?stype=cast&amp;stext=Bruce+Greenwood"> Bruce Greenwood</a></div>
+        <div class="mc-sinop" style="word-wrap: break-word;"><a title="Más allá del amor" href="/es/film953800.html">Jade, una tímida joven de familia privilegiada, y David, un chico carismático y divertido, se enamoran perdidamente durante un verano. Cuando el padre de ella intente separarlos, su pasión los llevará a... </a></div>
+    </div>
+    <div class="lists-box"></div>
+</div>
+			<div class="movie-cat-info">
+<div><i class="fa fa-clock-o"></i> 105 min.</div>	
+                <div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+    <div class="wrapper-movie">
+		<div>
+		<div class="movie-card movie-card-21" data-movie-id="320186">
+	<h3 style="word-wrap: break-word;"><a href="/es/film320186.html">Barbacoa de amigos</a></h3>    
+	<div class="mc-poster">
+        <a href="/es/film320186.html"><img src="http://pics.filmaffinity.com/Barbacoa_de_amigos-320186-full.jpg" border="0"></a>
+    </div>
+    <div class="mc-info-container">
+		<div class="mc-actions">
+		</div>
+        <div class="mc-year-country">(2014) <img src="imgs/FR.jpg" title="Francia"></div>
+        <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Eric+Lavaine">Eric Lavaine</a></div>
+        <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Lambert+Wilson">Lambert Wilson</a>, <a href="/es/search.php?stype=cast&amp;stext=Franck+Dubosc"> Franck Dubosc</a>, <a href="/es/search.php?stype=cast&amp;stext=Florence+Foresti"> Florence Foresti</a></div>
+        <div class="mc-sinop" style="word-wrap: break-word;"><a title="Barbacoa de amigos" href="/es/film320186.html">El día en que cumple 50 años, Antoine sufre un ataque al corazón. A partir de entonces, lo normal sería que se cuidara más. Pero Antoine se ha pasado la vida cuidando su salud, su dieta y... </a></div>
+    </div>
+    <div class="lists-box"></div>
+</div>
+			<div class="movie-cat-info">
+<div><i class="fa fa-clock-o"></i> 98 min.</div>	<div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>	
+                		</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+    <div class="wrapper-movie">
+		<div>
+		<div class="movie-card movie-card-21" data-movie-id="395771">
+	<h3 style="word-wrap: break-word;"><a href="/es/film395771.html">Las vidas de Grace (Short Term 12)</a></h3>    
+	<div class="mc-poster">
+        <a href="/es/film395771.html"><img src="http://pics.filmaffinity.com/Las_vidas_de_Grace_Short_Term_12-395771-full.jpg" border="0"></a>
+    </div>
+    <div class="mc-info-container">
+		<div class="mc-actions">
+		</div>
+        <div class="mc-year-country">(2013) <img src="imgs/US.jpg" title="Estados Unidos"></div>
+        <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Destin+Cretton">Destin Cretton</a></div>
+        <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Brie+Larson">Brie Larson</a>, <a href="/es/search.php?stype=cast&amp;stext=John+Gallagher+Jr."> John Gallagher Jr.</a>, <a href="/es/search.php?stype=cast&amp;stext=Kaitlyn+Dever"> Kaitlyn Dever</a></div>
+        <div class="mc-sinop" style="word-wrap: break-word;"><a title="Las vidas de Grace (Short Term 12)" href="/es/film395771.html">Grace (Brie Larson) es una joven veinteañera que trabaja como supervisora en Short Term 12, un centro de acogida para adolescentes en situación de vulnerabilidad. Le encanta su empleo y... </a></div>
+    </div>
+    <div class="lists-box"></div>
+</div>
+			<div class="movie-cat-info">
+<div><i class="fa fa-clock-o"></i> 96 min.</div>	
+                <div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>	
+                		</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+    <div class="wrapper-movie">
+		<div>
+		<div class="movie-card movie-card-21" data-movie-id="941366">
+	<h3 style="word-wrap: break-word;"><a href="/es/film941366.html">El extranjero</a></h3>    
+	<div class="mc-poster">
+        <a href="/es/film941366.html"><img src="http://pics.filmaffinity.com/El_extranjero-941366-full.jpg" border="0"></a>
+    </div>
+    <div class="mc-info-container">
+		<div class="mc-actions">
+		</div>
+        <div class="mc-year-country">(2014) <img src="imgs/US.jpg" title="Estados Unidos"/></div>
+        <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Brian+A+Miller">Brian A Miller </a></div>
+        <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Craig+Fairbrass">Craig Fairbrass</a>, <a href="/es/search.php?stype=cast&amp;stext=Jason+Patrick"> Jason Patrick</a>, <a href="/es/search.php?stype=cast&amp;stext=James+Caan"> James Caan</a></div>
+        <div class="mc-sinop" style="word-wrap: break-word;"><a title="El extranjero" href="/es/film941366.html">Gira en torno a un contratista militar británico Lex Walker a quien se le dice que su hija ha muerto. Cuando llega a Los Angeles descubre que el cuerpo no es el de su hija, y comienza una investigación... </a></div>
+    </div>
+    <div class="lists-box"></div>
+</div>
+			<div class="movie-cat-info">
+<div><i class="fa fa-clock-o"></i> 94 min.</div>	
+                <div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>	
+                		</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>
+    <div class="wrapper-movie">
+		<div>
+		<div class="movie-card movie-card-21" data-movie-id="184975">
+	<h3 style="word-wrap: break-word;"><a href="/es/film184975.html">Dos vidas</a></h3>    
+	<div class="mc-poster">
+        <a href="/es/film184975.html"><img src="http://pics.filmaffinity.com/Dos_vidas-184975-full.jpg" border="0"></a>
+    </div>
+    <div class="mc-info-container">
+		<div class="mc-actions">
+		</div>
+        <div class="mc-year-country">(2012) <img src="imgs/DE.jpg" title="Alemania"></div>
+        <div class="mc-director"><a href="/es/search.php?stype=director&amp;stext=Georg+Maas">Georg Maas</a>, <a href="/es/search.php?stype=director&amp;stext=Judith+Kaufmann"> Judith Kaufmann</a></div>
+        <div class="mc-cast"><a href="/es/search.php?stype=cast&amp;stext=Juliane+K%C3%B6hler">Juliane Köhler</a>, <a href="/es/search.php?stype=cast&amp;stext=Ken+Duken"> Ken Duken</a>, <a href="/es/search.php?stype=cast&amp;stext=Liv+Ullmann"> Liv Ullmann</a></div>
+        <div class="mc-sinop" style="word-wrap: break-word;"><a title="Dos vidas" href="/es/film184975.html">Ambientada en los 90, la película aborda el destino de las mujeres noruegas que tuvieron relaciones con los soldados alemanes durante la ocupación nazi. Narra, además, cómo vivieron bajo el régimen... </a></div>
+    </div>
+    <div class="lists-box"></div>
+</div>
+			<div class="movie-cat-info">
+<div><i class="fa fa-clock-o"></i> 97 min.</div>	
+                <div class="cat-mc-info"><a href="/es/cityTheaters.php?movie_id=742531"><i class="fa fa-ticket"></i> Ver</a></div>			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+	</div>-->
+  </div> 
+

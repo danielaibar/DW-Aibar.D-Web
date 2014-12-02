@@ -1,0 +1,11 @@
+﻿@{
+	WebSecurity.InitializeDatabaseConnection("MitjaMarkt",
+		"UserProfile", "UserId", "Email", true);
+		
+	WebMail.SmtpServer = "smtp-mail.outlook.com";
+	WebMail.SmtpPort = 587;
+	WebMail.EnableSsl = true;
+	WebMail.UserName = "pruebasdaniel@outlook.com";
+	WebMail.From = "pruebasdaniel@outlook.com"; 
+	WebMail.Password = "d987654321";   
+}

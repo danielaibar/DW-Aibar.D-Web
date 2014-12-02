@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Shared/Layouts/_Layout.cshtml";
+    Page.Title = "Bienvenidos a VideoMarkt";
+
+
+  
+              /* var titulo="";
+               var pais = "";
+               var actores = "";
+               var anyo = "";
+               var duracion = "";
+               var sinopsis = "";
+   
+
+                Validation.RequireField("titulo", "El campo Titulo no puede estar en blanco");
+                Validation.RequireField("pais", "debe proporcionar el Paid correspondiente");
+                //Validation.RequireField("actores", "El campo Reparto no puede estar en blanco");
+                Validation.RequireField("anyo", "El campo A&ntilde;o no puede estar en blanco");
+                Validation.RequireField("duracion", "El campo Duracion no puede estar en blanco");
+                Validation.RequireField("sinopsis", "El campo Sinopsis no puede estar en blanco");
+                
+              
+      
+                if(IsPost)
+                {
+                    titulo = Request["titulo"];
+                    pais = Request["pais"];
+                    actores = Request["actores"];
+                    anyo = Request["anyo"];
+                    durecion = Request["duracion"];
+                    sinopsis = Request["sinopsis"];
+                    
+
+                    if(Validation.IsValid())
+                    {
+                        if(WebSecurity.UserExists(titulo))
+                        {
+                            ModelState.AddError("titulo", "Ya existe un Pelicula con ese nombre");
+                        }
+
+                        if(ModelState.IsValid)
+                        {
+                            ****************************************WebSecurity.Logout();
+               
+                           /************************************** var token = WebSecurity.CreateUserAndAccount( Titulo: titulo,
+                                                                          Pais: pais,
+                                                                          Actores: actores,
+                                                                          Anyo: anyo,
+                                                                          Duracion: duracion,
+                                                                          Sinopsi: sinopsis,
+                                                                          propertyValues:new {emailAddress = email},
+                                                                          requireConfirmationToken: true);**************************
+
+                           var db = Database.Open("MitjaMARKT");
+                             var sqlSelect = "SELECT TOP 6 * FROM Peliculas " +
+                                                                                "ORDER BY id DESC";
+
+
+
+                            
+                            
+                        }
+                    }
+                }*/
+}
+
+
+<h1>Insertar nueva Pelicula</h1>
+
+
+<div style="width: 235px; margin: 0 auto">
+    <form style="">
+        Titulo <br />
+        <input type="text" id="nombre"/><br />
+
+        Pais <br />
+        <input type="text" id="pais"/><br />
+
+        Reparto <br />
+        <input type="text" id="actores"/><br />
+
+        Año <br />
+        <input type="text" id="anyo"/><br />
+
+        Duracion <br />
+        <input type="text" id="duracion"/><br />
+
+        Sipnosis <br />
+        <textArea id="sipnosis" cols="22" rows="10"></textArea><br />
+
+        Portada <br />
+        <input type="text" id="portada"/><br /><br />
+        <div style="padding-left: 65px;">
+            <input type="submit" value="Insertar"/>
+        </div>
+        
+
+    </form>
+</div>
+

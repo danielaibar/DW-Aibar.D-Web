@@ -1,0 +1,105 @@
+﻿@{
+   var username="";
+   var email = "";
+   var password1 = "";
+   var password2 = "";
+   
+
+    Validation.RequireField("username", "El campo Usuario no puede estar en blanco");
+    Validation.RequireField("email", "debe proporcionar una direccion de correo");
+    Validation.RequireField("password1", "El campo Contraseña no puede estar en blanco");
+    //Validation.RequireField("password1", "El campo Confimrar Contraseña no puede estar en blanco");
+    Validation.Add("password1", Validator.EqualsTo("password2", "Las contraseñas no coinciden"));
+
+   // Validation.Add("email", Validator.Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
+   // "la direccion de correo no es correcta"));
+      
+    if(IsPost)
+    {
+        username = Request["username"];
+        email = Request["email"];
+        password1 = Request["password1"];
+        password2 = Request["password2"];
+
+        if(Validation.IsValid())
+        {
+            if(WebSecurity.UserExists(username))
+            {
+                ModelState.AddError("username", "Ya existe un usuario con ese nombre");
+            }
+
+            if(ModelState.IsValid)
+            {
+                WebSecurity.Logout();
+               
+                var token = WebSecurity.CreateUserAndAccount( userName: username,
+                                                              password: password1,
+                                                              propertyValues:new {emailAddress = email},
+                                                              requireConfirmationToken: true);
+
+                //General link de confirmacion
+
+                var hostUrl = Request.Url.GetComponents(UriComponents.SchemeAndServer,UriFormat.Unescaped);
+                var confirmAccountUrl = hostUrl + "/confirmAccount?confirmationToken="+ HttpUtility.UrlEncode(token);
+
+
+                //Enviar email de confirmacion
+                WebMail.Send( to: email,
+                subject: "Gracias por registrarte - " + username,
+                body: "Por favor, visita <a href='" + confirmAccountUrl + "'>" + confirmAccountUrl + "</a> para activar tu cuenta. ");
+
+                //WebSecurity.Login(username, password1);
+                Response.Redirect("confirmSent");
+
+
+
+                /*WebSecurity.Login(username, password1);
+                */
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <h1>Registrarse</h1>
+        @Html.ValidationSummary("No es posible crear la cuenta de usuario. Por favor, corrige lo siguiente; ")
+        <form action="register" method="post">
+            <div>
+                @Html.Label("Usuario:","username")<br/>
+                @Html.TextBox("username", username)
+                @Html.ValidationMessage("username") @*"*") Validation.GetErrors("username").FortsOrDefault())*@
+            </div>
+
+            <div>
+                @Html.Label("Email:","email")<br />
+                @Html.TextBox("email", email)
+                @Html.ValidationMessage("email")
+            </div>
+
+            <div>
+                 @Html.Label("Constraseña:","password1")<br/>
+                @Html.TextBox("password1", password1)
+                @Html.ValidationMessage("password1")
+            </div>
+
+            <div>
+                 @Html.Label("Confirmar Constraseña:","password2")<br/>
+                @Html.TextBox("password2", password2)
+                @Html.ValidationMessage("password2")
+            </div>
+
+            <div>
+                <input type="submit" value="Registrar" />
+            </div>
+        
+        </form>
+        
+    </body>
+</html>
