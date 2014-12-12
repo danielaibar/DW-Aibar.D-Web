@@ -6,10 +6,10 @@
     if(IsPost)
     {
         usuario = Request["usuario"];
-        comentario = Request["comentario"];
+        comentario = Request.Unvalidated["comentario"]; /*ERROR EN PONER ELEMENTOS CON CARACTERES EXTRAÑOS*/
         peliculaID = Request["idPelicula"];
         
-         var db3 = Database.Open("MitjaMARKT");
+         var db3 = Database.Open("VIDEO");
             var sqlSelect3 = "INSERT INTO Comentarios (Usuario, Comentario, idPelicula) " +
                     "VALUES (@0,@1,@2)" ;
 

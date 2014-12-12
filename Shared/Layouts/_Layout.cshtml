@@ -19,8 +19,8 @@
 
             <div id="header">
                 <!--<p class="logo"><a href="@Href("~/")">VideoMarkt</a> </p>-->
-                <div style="width: 235px; margin-left: 30px;">
-                    <img  style="width: 100%;" src="~/imgs/logoimago_color_def2.png" onclick="document.formu.submit();" />
+                <div style="width: 235px; margin-left: 30px; padding-top: 3px;">
+                    <img  style="width: 100%;" src="~/imgs/logoimago_color_def2.png" onclick="document.formu.submit();" alt="imgen" />
                 </div>
                 <div id="headerRight" style="margin-top: -63px;">
 					<div id="accountSummary">@MembershipHelpers.AccountSummary()</div>
@@ -43,11 +43,13 @@
             <div id="content">
                 <div id="categorias">
                     @RenderPage("~/Shared/Partials/_Categorias.cshtml")
-                    <div class="insertar">
-                        <a href="~/insertar.cshtml">
-                            <p style="color: #ddd; text-transform: uppercase; padding-bottom: 20px;">Insertar nueva Pelicula</p>
-                        </a>
-                    </div>
+                     @if(WebSecurity.IsAuthenticated) {
+                        <div class="insertar">
+                            <a href="~/insertar.cshtml">
+                                <p style="color: #ddd; text-transform: uppercase; padding-bottom: 20px;">Insertar nueva Pelicula</p>
+                            </a>
+                        </div>
+                    }
                 </div>
 
                 <div id="main">

@@ -2,13 +2,18 @@
     Layout = "~/Shared/Layouts/_Layout.cshtml";
     Page.Title = "Estrenos VideoMarkt";
 
-   
-
-    
-
-    var db = Database.Open("MitjaMARKT");
-    var sqlSelect = "SELECT * FROM Peliculas " +
+   var anyo = "";
+   var sqlSelect = "";
+    if(!UrlData[0].Equals("")){
+        anyo = UrlData[0];
+        sqlSelect = "SELECT * FROM Peliculas WHERE Anyo ="+anyo;
+    }else{
+        sqlSelect = "SELECT * FROM Peliculas " +
                     "WHERE Anyo in ( SELECT TOP 1 Anyo FROM Peliculas GROUP BY Anyo ORDER BY Anyo DESC )";
+    }
+
+    var db = Database.Open("VIDEO");
+    
                   
 
     var productos =  db.Query(sqlSelect);
@@ -18,7 +23,7 @@
     
 }
 
-<h1>Estrenos</h1>
+<h1 style="text-align: center;">Estrenos</h1>
 <style>
 
 </style>

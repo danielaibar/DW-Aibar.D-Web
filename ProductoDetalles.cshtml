@@ -3,7 +3,7 @@
 
     var productoID = !UrlData[0].IsEmpty() ? UrlData[0] : "0";
 
-    var db = Database.Open("MitjaMARKT");
+    var db = Database.Open("VIDEO");
     var sqlSelect = "SELECT * FROM Peliculas WHERE id = @0";
 
     var producto = db.QuerySingle(sqlSelect,productoID);
@@ -12,7 +12,7 @@
 
    
 
-    var db2 = Database.Open("MitjaMARKT");
+    var db2 = Database.Open("VIDEO");
     var sqlSelect2 = "SELECT * FROM Comentarios " +
                     
                     "WHERE idPelicula = @0";
@@ -38,11 +38,11 @@ else
         <h1>@producto.Titulo</h1>
         <div id="productoDetails">
             <div style="display: flex;">
-                <img src="~/imgs/@producto.Portada" border="0">
+                <img src="~/imgs/@producto.Portada" style="border: 0;" alt="imgen">
                 <div style="margin-left: 10px;">
                     <p style="padding-bottom: 5px;">Año: @producto.Anyo</p>
                     <p style="padding-bottom: 5px;">Duracion: @producto.Duracion min</p>
-                    <p style="padding-bottom: 5px;">Pais: <img src="~/imgs/@producto.Pais" title="Alemania"/></p>
+                    <p style="padding-bottom: 5px;">Pais: <img src="~/imgs/@producto.Pais" title="Alemania" alt="imgen"/></p>
                 </div>
             </div>
             <div style="margin-top:20px ">
@@ -50,75 +50,10 @@ else
                 <p>Sipnosis: @producto.Sipnosi</p>
 
             </div>
-    <div id="lista-comentarios">
 
-        <div class="barra-comentarios">
-		    <div class="barra-izq"><span class="">Comentarios</span></div>		
-		</div>
-
-        <ul class="comentarios">
-        @if(comentarios.Count() == 0){
-            <span>se el primero en comentar</span>
-        }
-        
-        @foreach(var item2 in comentarios)
-        {
-            <li>
-                <div class="com_capa_avatar">
-                    <img src="/imgs/no_avatar_m.png" width="50px" height="50px" border="0" class="avatar" alt="Avatar">
-                </div>
-
-			    <div class="com_capa_globo">
-                    <img src="/imgs/globo.png" border="0">
-                </div>
-
-			    <div class="com_capa_ppal">
-			        <div class="cabecera">				
-			            <span class="usuario"><a style="color: #808080;" href="#">@item2.Usuario</a></span>
-			            <span class="fecha"><!--Hoy, 16:41--></span>                 
-			        </div>
-
-                    <div class="cuerpo">@item2.Comentario</div>
-
-                </div>
-			
-            </li>
-       }
- 
-        </ul>
-    </div>
-            <div class="seccion">Dejar comentario</div>
-            <div class="box">
-                <div align="center">
-                 <form class="formulario-login" action="~/insertarComentario.cshtml" method="post">
-                     <div style="text-align: left;">
-                         Usuario: <br /><input type="text" name="usuario" value="@WebSecurity.CurrentUserName" />
-                     </div>
-                    
-                     <div style="display: none;">
-                        <input type="text" name="idPelicula" value="@productoID" />
-                     </div>
-                    <br />
-                     <div style="text-align: left;">
-                        <p>Comentario: [Campo obligatorio]<br><textarea name="comentario" style="height:60px;width:445px;font-size:11px;color:#334455"></textarea></p>
-                     </div>
-				    
-				    
-           
-                     <p>
-
-                        <input name="Enviar" type="submit" value="Enviar comentario" class="boton">
-                    </p>			
-				    
-				</form>
-                </div>
-                <br><br>
-            </div>
-            
-        </div>
-
-
-        <div id="pedidoForm">
+            <br /> <br />
+            <div style="text-align: center;">
+            <div id="pedidoForm" style="margin:  0 auto;">
             <form action="~/" method="post">
                 <fieldset>
                     <legend>Descargar Pelicula</legend>
@@ -126,7 +61,7 @@ else
                     <p>
                         <!--@@Html.Hidden("productoID", id)-->
                       
-                        <a  href="~/get-torrent/@producto.Torrent"><button >Descargar</button></a>
+                        <a  href="@producto.Torrent" style="color: #334455">Descargar</a>
                     </p>
                 </fieldset>
             </form>
@@ -149,6 +84,95 @@ else
                 </p>
             </fieldset>-->
         </div>
+            </div>
+            <br /> 
+
+
+
+
+
+    <div id="lista-comentarios">
+
+        <div class="barra-comentarios">
+		    <div class="barra-izq"><span class="">Comentarios</span></div>		
+		</div>
+
+        <ul class="comentarios">
+        @if(comentarios.Count() == 0){
+            <li>Se el primero en comentar</li>
+            <li></li>
+        }
+        
+        @foreach(var item2 in comentarios)
+        {
+            <li>
+                <div class="com_capa_avatar">
+                    <img src="/imgs/no_avatar_m.png" width="50px" height="50px" class="avatar" alt="Avatar" style="border: 0;">
+                </div>
+
+			    <div class="com_capa_globo">
+                    <img src="/imgs/globo.png" style="border: 0;" alt="Avatar">
+                </div>
+
+			    <div class="com_capa_ppal">
+			        <div class="cabecera">				
+			            <span class="usuario"><a style="color: #808080;" href="#">@item2.Usuario</a></span>
+			            <span class="fecha"><!--Hoy, 16:41--></span>                 
+			        </div>
+
+                    <div class="cuerpo">@item2.Comentario</div>
+
+                </div>
+			
+            </li>
+       }
+ 
+        </ul>
+    </div>
+            <div class="seccion">Dejar comentario</div>
+            <div class="box">
+           @if(WebSecurity.IsAuthenticated) {
+               
+            
+                <div style="text-align:'center';">
+                 <form class="formulario-login" action="~/insertarComentario.cshtml" method="post">
+                     <div style="text-align: left; display: none;">
+                         Usuario: <br /><input type="text" name="usuario" value="@WebSecurity.CurrentUserName" />
+                     </div>
+                    
+                     <div style="display: none;">
+                        <input type="text" name="idPelicula" value="@productoID" />
+                     </div>
+                    <br />
+                     <div style="text-align: left;">
+                        <p>Comentario: [Campo obligatorio]<br><textarea name="comentario" style="height:60px;width:99%;font-size:11px;color:#334455"></textarea></p>
+                     </div>
+				    
+				    
+           
+                     <p>
+
+                        <input name="Enviar" type="submit" value="Enviar comentario" class="boton">
+                    </p>			
+				    
+				</form>
+                </div>
+                <br><br>
+          
+
+               }
+
+                else{
+                    <p>No estas registrado para poder comentar</p>
+
+
+                }
+              </div>
+            
+        </div>
+
+
+        
     </text>
 }
 

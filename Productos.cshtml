@@ -10,7 +10,7 @@
 
     Page.Title = nombreCategoria;
 
-    var db = Database.Open("MitjaMARKT");
+    var db = Database.Open("VIDEO");
     var sqlSelect = "SELECT * FROM Peliculas " +
                     "LEFT OUTER JOIN Categorias ON Peliculas.Categoria = Categorias.categoriaID " +
                     "WHERE Categorias.nombre = @0";
@@ -19,7 +19,7 @@
 }
 
 <div id="contentTitle">
-    <h1>@nombreCategoria</h1>
+    <h1 style="text-align: center;">@nombreCategoria</h1>
 </div>
 
 @if(productos.Count() == 0)

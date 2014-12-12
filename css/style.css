@@ -9,7 +9,7 @@ body {
     color:  #333;
     font-family: Verdana, Helvetica, sans-serif;
     font-size: .75em;
-    background-image: url("../imgs/charcoal-fotos-para-twitter.jpg")
+    background-image: url("../imgs/debut_dark.png")
 }
 
 a:link {
@@ -157,7 +157,7 @@ a.nav {
 
 #productoDetails{
     float: left;
-    width: 450px;
+    width: 600px;
 }
 
 #productoDetails .precio{
@@ -168,12 +168,12 @@ a.nav {
 }
 
 #pedidoForm{
-    float: left;
+   /* float: left;*/
 }
 
 #pedidoForm fieldset {
     width: 230px;
-    margin: 0px;
+    margin: 0 auto;
     padding: 10px;
 }
 
@@ -266,7 +266,7 @@ a.nav {
 
     .movie-card-21 .mc-info-container > div {
         padding: 1px 0px;
-        margin-bottom: 3px;
+        margin-bottom: 10px;
     }
 
 .movie-card-21 .mc-year-country {

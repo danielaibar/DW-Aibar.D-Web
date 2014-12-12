@@ -6,7 +6,7 @@
 
     
 
-    var db = Database.Open("MitjaMARKT");
+    var db = Database.Open("VIDEO");
     var sqlSelect = "SELECT TOP 6 * FROM Peliculas " +
                     "ORDER BY id DESC";
                   
@@ -14,7 +14,7 @@
     var productos =  db.Query(sqlSelect);
 }
 
-<h1>Bienvenidos a VideoMarkt</h1>
+<h1 style="text-align: center;">Bienvenidos a VideoMarkt</h1>
 <style>
 
 </style>
