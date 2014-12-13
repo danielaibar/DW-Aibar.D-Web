@@ -1,4 +1,4 @@
-﻿@* Funciones de Administracion *@
+﻿@* FALTA ADMINISTRAR BIEN LA PAGINA *@
 
 @functions {
 
@@ -9,6 +9,8 @@
 
 		return db.Query(sqlQuery, categoriaTitulo).Count() > 0;
 	}
+    //CREAR FUNCION DE SACAR TODAS LAS PELICULAS EN UNA LISTA Y UNA 'X' A SU DERECHA PARA PODER ELIMINARLAS 
+    //DE LA BASE DE DATOS SI ES ADMIN MAS FACILMENTE
 	
 	public static bool CategoriaEstaVacia(string categoriaId)	
 	{

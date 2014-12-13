@@ -14,7 +14,7 @@
     var productos =  db.Query(sqlSelect);
 }
 
-<h1 style="text-align: center;">Bienvenidos a VideoMarkt</h1>
+<h1 style="text-align: center;">Bienvenidos a Filmfin</h1>
 <style>
 
 </style>
@@ -24,15 +24,15 @@
         {
             <div class="wrapper-movie">
 		    <div>
-		    <div class="movie-card movie-card-21" data-movie-id="184975">
+		    <div class="movie-card movie-card-21" >
 	            <h3 style="word-wrap: break-word;"><a href="~/ProductoDetalles/@item.id">@item.Titulo</a></h3>    
 	            <div class="mc-poster">
-                    <a href="~/ProductoDetalles/@item.id"><img src="~/imgs/@item.Portada" border="0"></a>
+                    <a href="~/ProductoDetalles/@item.id"><img src="~/imgs/@item.Portada" style="border:  0;" alt="foto"></a>
                 </div>
                 <div class="mc-info-container">
 		            <div class="mc-actions">
 		            </div>
-                    <div class="mc-year-country">(@item.Anyo) <img src="~/imgs/@item.Pais" title="Alemania"></div>
+                    <div class="mc-year-country">(@item.Anyo) <img src="~/imgs/@item.Pais" title="Alemania" alt="anyo"></div>
         
                     <div class="mc-cast">@item.Actores</div>
                     <div class="mc-sinop" style="word-wrap: break-word;">@item.Sipnosi</div>

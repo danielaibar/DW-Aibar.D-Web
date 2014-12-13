@@ -9,7 +9,9 @@
 			Bienvenido <a href="@Href("~/Account/ChangePassword")">@WebSecurity.CurrentUserName</a> |
 			
 			<a href="@Href("~/Account/Logout")">Cerrar Sesion</a>
-			
+			@* codigo de administracion_ (MODIFICAR EL ADMIN) *@
+
+
 			@if (Roles.IsUserInRole(WebSecurity.CurrentUserName, "Admin"))
 			{
 				<text>

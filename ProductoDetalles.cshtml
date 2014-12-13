@@ -37,7 +37,7 @@ else
     <text>
         <h1>@producto.Titulo</h1>
         <div id="productoDetails">
-            <div style="display: flex;">
+            <div style="display: flex;">  <!--ERROR EN COMPATIBILIDAD, BUSCAR DISPLAY COMPATIBLE-->
                 <img src="~/imgs/@producto.Portada" style="border: 0;" alt="imgen">
                 <div style="margin-left: 10px;">
                     <p style="padding-bottom: 5px;">Año: @producto.Anyo</p>
@@ -59,30 +59,16 @@ else
                     <legend>Descargar Pelicula</legend>
                     
                     <p>
+                        <!--INTENTAR HACER UNA CONSULTA PARA ENSEÑAR LA CATEGORIA CORRESPONDIENTE A LA PELICULA-->
+                        <!-- -->
                         <!--@@Html.Hidden("productoID", id)-->
                       
                         <a  href="@producto.Torrent" style="color: #334455">Descargar</a>
                     </p>
                 </fieldset>
             </form>
-           <!-- <fieldset>
-                <legend>Compartir</legend>
-                <p>
-                    @*@GooglePlusOne.PlusOneButton(language: GooglePlusOne.Languages.Spanish)*@
-                </p>
-                <p>
-                    @*@Twitter.TweetButton(tweetText: "Echale un vistazo en el sitio web de MitjaMark",
-                                         dataCount: "horizontal")*@
-                </p>
-                <p>
-                    @*@{string currentUrl = Request.Url.ToString();}
-                    @Facebook.LikeButton(currentUrl,
-                                    width: 230,
-                                    buttonLayout: "standard",
-                                    height: 25,
-                                    showFaces: false)*@
-                </p>
-            </fieldset>-->
+
+                <!-- MIRAR COMO INSERTAR CORRECTAMENTE LOS BOTONES DE LAS REDES SOCIALES -->
         </div>
             </div>
             <br /> 
@@ -136,20 +122,18 @@ else
             
                 <div style="text-align:'center';">
                  <form class="formulario-login" action="~/insertarComentario.cshtml" method="post">
-                     <div style="text-align: left; display: none;">
+                     <div style="text-align: left; display: none;"><!--MUY VULNERABLE-->
                          Usuario: <br /><input type="text" name="usuario" value="@WebSecurity.CurrentUserName" />
                      </div>
                     
-                     <div style="display: none;">
+                     <div style="display: none;"> <!--MUY VULNERABLE-->
                         <input type="text" name="idPelicula" value="@productoID" />
                      </div>
                     <br />
                      <div style="text-align: left;">
                         <p>Comentario: [Campo obligatorio]<br><textarea name="comentario" style="height:60px;width:99%;font-size:11px;color:#334455"></textarea></p>
                      </div>
-				    
-				    
-           
+
                      <p>
 
                         <input name="Enviar" type="submit" value="Enviar comentario" class="boton">
